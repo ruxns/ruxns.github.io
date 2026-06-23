@@ -167,10 +167,27 @@
     .hero-container {  
       display: flex;  
       flex-direction: column;  
-      align-items: center;  
-      width: 100%;  
-      gap: 12px;  
+      gap: 16px;  
       margin-top: 18px;  
+    }  
+  
+    /* প্রোফাইল পিকচারটি মাঝখানে রাখার জন্য কন্টেইনার */  
+    .profile-pic-center {  
+      display: flex;  
+      justify-content: center;  
+      width: 100%;  
+      margin-bottom: 20px; /* বক্সগুলোর সাথে স্পেসিং */  
+    }  
+  
+    /* গোল এবং নিওন গ্লোয়িং বর্ডার ইফেক্ট */  
+    .round-profile {  
+      width: 110px;  
+      height: 110px;  
+      border-radius: 50%;  
+      object-fit: cover; /* ছবি যেন ফেটে না যায় */  
+      border: 3px solid var(--neon);  
+      box-shadow: 0 0 15px rgba(0, 255, 195, 0.4);  
+      backdrop-filter: blur(8px);  
     }  
   
     .hero-box {  
@@ -564,6 +581,12 @@
         border-radius: 16px;  
       }  
   
+      /* মোবাইল স্ক্রিনের জন্য ছবির সাইজ অ্যাডজাস্টমেন্ট */  
+      .round-profile {  
+        width: 100px;  
+        height: 100px;  
+      }  
+  
       .hero-box.bruno-small-box {  
         padding: 8px 20px;   
       }  
@@ -601,6 +624,11 @@
     }  
   
     @media (max-width: 420px){  
+      .round-profile {  
+        width: 90px;  
+        height: 90px;  
+      }  
+  
       .hero-title{  
         font-size:0.95rem;  
         letter-spacing:1px;  
@@ -628,6 +656,10 @@
   
   <div class="container">  
     <div class="hero-container">  
+      <div class="profile-pic-center">  
+        <img src="https://i.ibb.co/5xbS91V/1000001735.jpg" alt="Bruno Profile" class="round-profile">  
+      </div>  
+  
       <section class="hero-box">  
         <div class="hero-title">CYBER SECURITY EXPERT</div>  
       </section>  
@@ -760,7 +792,7 @@
       </form>  
     </section>  
   
-    <div class="footer">  
+    <div class="container footer">  
       <span class="footer-text">© 2026 CYBER SECURITY EXPERT BRUNO</span>  
     </div>  
   </div>  
