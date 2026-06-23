@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cyber Specialist Bruno</title>
+  <title>Cyber Security Expert - Bruno</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,21 +18,21 @@
     }
 
     :root{
-      --bg1:#03050b;
-      --bg2:#08111d;
-      --bg3:#0c1627;
-      --card:rgba(10,16,30,0.74);
-      --line:rgba(0,255,195,0.14);
+      --bg1:#04101a;
+      --bg2:#0a1727;
+      --bg3:#101f33;
+      --card:rgba(10,16,30,0.78);
+      --line:rgba(0,255,195,0.18);
       --line-2:rgba(255,255,255,0.08);
       --text:#ecfffa;
-      --muted:#9fc5bc;
+      --muted:#b8ddd3;
       --neon:#00ffc3;
       --neon2:#00d9ff;
       --pink:#ff4fd8;
       --purple:#9d5cff;
       --green:#53ff83;
       --yellow:#ffe066;
-      --shadow:0 0 30px rgba(0,255,195,0.12);
+      --shadow:0 0 34px rgba(0,255,195,0.18);
     }
 
     html{ scroll-behavior:smooth; }
@@ -43,9 +43,10 @@
       color:var(--text);
       overflow-x:hidden;
       background:
-        radial-gradient(circle at 10% 10%, rgba(0,255,195,0.08), transparent 25%),
-        radial-gradient(circle at 90% 15%, rgba(0,217,255,0.10), transparent 25%),
-        radial-gradient(circle at 80% 85%, rgba(157,92,255,0.10), transparent 25%),
+        radial-gradient(circle at 10% 10%, rgba(0,255,195,0.16), transparent 26%),
+        radial-gradient(circle at 90% 15%, rgba(0,217,255,0.18), transparent 28%),
+        radial-gradient(circle at 80% 85%, rgba(157,92,255,0.16), transparent 26%),
+        radial-gradient(circle at 25% 75%, rgba(255,79,216,0.12), transparent 24%),
         linear-gradient(135deg, var(--bg1), var(--bg2) 45%, var(--bg3));
       position:relative;
     }
@@ -54,18 +55,18 @@
       position:fixed;
       inset:0;
       background-image:
-        linear-gradient(rgba(0,255,195,0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,195,0.045) 1px, transparent 1px);
-      background-size:40px 40px;
-      animation:gridMove 15s linear infinite;
+        linear-gradient(rgba(0,255,195,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,195,0.06) 1px, transparent 1px);
+      background-size:38px 38px;
+      animation:gridMove 10s linear infinite;
       pointer-events:none;
       z-index:0;
-      mask-image: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0.25));
+      mask-image: linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(255,255,255,0.35));
     }
 
     @keyframes gridMove{
       from{transform:translateY(0);}
-      to{transform:translateY(40px);}
+      to{transform:translateY(38px);}
     }
 
     .noise{
@@ -73,7 +74,7 @@
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:0.035;
+      opacity:0.04;
       background-image:
         radial-gradient(circle at 25% 25%, #fff 0.6px, transparent 0.7px),
         radial-gradient(circle at 75% 45%, #fff 0.6px, transparent 0.7px),
@@ -85,44 +86,44 @@
     .orb{
       position:fixed;
       border-radius:50%;
-      filter:blur(40px);
+      filter:blur(46px);
       pointer-events:none;
       z-index:0;
-      opacity:0.16;
-      animation:floatOrb 10s ease-in-out infinite alternate;
+      opacity:0.22;
+      animation:floatOrb 7s ease-in-out infinite alternate;
     }
 
     .orb1{
-      width:240px;
-      height:240px;
+      width:260px;
+      height:260px;
       background:var(--neon);
-      top:40px;
-      left:-60px;
+      top:30px;
+      left:-50px;
     }
 
     .orb2{
-      width:260px;
-      height:260px;
+      width:280px;
+      height:280px;
       background:var(--neon2);
       right:-70px;
-      bottom:80px;
-      animation-duration:12s;
+      bottom:60px;
+      animation-duration:9s;
     }
 
     .orb3{
-      width:180px;
-      height:180px;
+      width:200px;
+      height:200px;
       background:var(--pink);
-      top:48%;
+      top:50%;
       left:50%;
       transform:translateX(-50%);
-      animation-duration:14s;
-      opacity:0.10;
+      animation-duration:11s;
+      opacity:0.14;
     }
 
     @keyframes floatOrb{
       from{transform:translateY(0) scale(1);}
-      to{transform:translateY(35px) scale(1.08);}
+      to{transform:translateY(28px) scale(1.1);}
     }
 
     #matrixCanvas{
@@ -131,7 +132,7 @@
       width:100%;
       height:100%;
       z-index:0;
-      opacity:0.13;
+      opacity:0.18;
       pointer-events:none;
     }
 
@@ -140,21 +141,21 @@
       inset:0;
       z-index:0;
       pointer-events:none;
-      opacity:0.08;
+      opacity:0.09;
       background:
         repeating-linear-gradient(
           to bottom,
           rgba(255,255,255,0.05) 0px,
           rgba(255,255,255,0.05) 1px,
           transparent 2px,
-          transparent 6px
+          transparent 5px
         );
-      animation:scanMove 7s linear infinite;
+      animation:scanMove 4.5s linear infinite;
     }
 
     @keyframes scanMove{
       from{transform:translateY(0);}
-      to{transform:translateY(24px);}
+      to{transform:translateY(22px);}
     }
 
     .container{
@@ -170,13 +171,13 @@
       overflow:hidden;
       border-radius:28px;
       border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(12,18,32,0.90), rgba(8,13,24,0.74));
+      background:linear-gradient(180deg, rgba(12,18,32,0.92), rgba(8,13,24,0.78));
       backdrop-filter:blur(16px);
       box-shadow:
-        0 20px 60px rgba(0,0,0,0.28),
+        0 20px 60px rgba(0,0,0,0.30),
         0 0 0 1px rgba(255,255,255,0.02) inset,
         var(--shadow);
-      padding:28px 24px 24px;
+      padding:26px 24px 24px;
       margin-top:18px;
     }
 
@@ -186,31 +187,53 @@
       inset:-1px;
       background:
         linear-gradient(90deg,
-          rgba(0,255,195,0.14),
-          rgba(0,217,255,0.12),
-          rgba(157,92,255,0.14),
-          rgba(255,79,216,0.10)
+          rgba(0,255,195,0.18),
+          rgba(0,217,255,0.14),
+          rgba(157,92,255,0.16),
+          rgba(255,79,216,0.12)
         );
       filter:blur(28px);
       z-index:0;
-      opacity:0.85;
+      opacity:0.9;
     }
 
     .hero > *{ position:relative; z-index:1; }
 
     .title-row{
       display:flex;
+      flex-direction:column;
       align-items:center;
       justify-content:center;
       text-align:center;
-      white-space:nowrap;
-      overflow-x:auto;
-      scrollbar-width:none;
-      gap:0;
+      gap:8px;
     }
 
-    .title-row::-webkit-scrollbar{
-      display:none;
+    .hero-subtitle{
+      font-family:"Orbitron", sans-serif;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:1.5px;
+      font-size:clamp(1rem, 2.4vw, 1.5rem);
+      line-height:1.2;
+      white-space:nowrap;
+      background:linear-gradient(
+        90deg,
+        #ffffff 0%,
+        #ffe066 18%,
+        #ff4fd8 38%,
+        #9d5cff 58%,
+        #00d9ff 78%,
+        #ffffff 100%
+      );
+      background-size:300% 100%;
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      animation:brunoGlow 4.5s linear infinite;
+      text-shadow:
+        0 0 10px rgba(255,224,102,0.18),
+        0 0 18px rgba(255,79,216,0.14),
+        0 0 24px rgba(0,217,255,0.10);
     }
 
     .hero-title{
@@ -218,7 +241,7 @@
       font-weight:900;
       text-transform:uppercase;
       letter-spacing:1.4px;
-      font-size:clamp(1.15rem, 2.9vw, 2.15rem);
+      font-size:clamp(1.15rem, 2.9vw, 2.1rem);
       line-height:1.2;
       white-space:nowrap;
       background:linear-gradient(
@@ -249,12 +272,17 @@
       100%{ background-position:300% 50%; }
     }
 
+    @keyframes brunoGlow{
+      0%{ background-position:0% 50%; }
+      100%{ background-position:300% 50%; }
+    }
+
     .hero-line{
       width:min(700px, 100%);
       height:1px;
       margin:18px auto 0;
-      background:linear-gradient(90deg, transparent, rgba(0,255,195,0.4), rgba(0,217,255,0.35), transparent);
-      box-shadow:0 0 18px rgba(0,255,195,0.12);
+      background:linear-gradient(90deg, transparent, rgba(0,255,195,0.5), rgba(0,217,255,0.4), transparent);
+      box-shadow:0 0 18px rgba(0,255,195,0.16);
     }
 
     .panel{
@@ -279,7 +307,7 @@
       width:140px;
       height:140px;
       border-radius:50%;
-      background:radial-gradient(circle, rgba(0,255,195,0.12), transparent 70%);
+      background:radial-gradient(circle, rgba(0,255,195,0.16), transparent 70%);
       pointer-events:none;
     }
 
@@ -323,7 +351,7 @@
       text-decoration:none;
       color:var(--text);
       border:1px solid var(--line-2);
-      background:linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02));
+      background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
       border-radius:18px;
       padding:17px 14px;
       display:flex;
@@ -395,8 +423,8 @@
       outline:none;
       border-radius:16px;
       padding:15px 16px;
-      background:rgba(255,255,255,0.038);
-      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.042);
+      border:1px solid rgba(255,255,255,0.09);
       color:var(--text);
       font-size:15px;
       transition:0.22s ease;
@@ -404,7 +432,7 @@
     }
 
     input::placeholder, textarea::placeholder{
-      color:#89aea5;
+      color:#9fc6bc;
     }
 
     input:focus, select:focus, textarea:focus{
@@ -425,7 +453,7 @@
     }
 
     .helper{
-      color:#cde9e1;
+      color:#d5f0e8;
       font-size:13px;
       line-height:1.55;
       margin-top:6px;
@@ -454,7 +482,7 @@
         #00ffc3
       );
       background-size:300% 100%;
-      animation:buttonFlow 5s linear infinite;
+      animation:buttonFlow 4s linear infinite;
       transition:0.25s ease;
       box-shadow:
         0 14px 30px rgba(0,255,195,0.18),
@@ -552,7 +580,11 @@
       }
 
       .hero-title{
-        font-size:clamp(1rem, 4.8vw, 1.45rem);
+        font-size:clamp(1rem, 4.8vw, 1.4rem);
+      }
+
+      .hero-subtitle{
+        font-size:clamp(.9rem, 4vw, 1.15rem);
       }
 
       .problem-heading{
@@ -562,7 +594,12 @@
 
     @media (max-width: 420px){
       .hero-title{
-        font-size:.92rem;
+        font-size:.9rem;
+        letter-spacing:.8px;
+      }
+
+      .hero-subtitle{
+        font-size:.82rem;
         letter-spacing:.8px;
       }
 
@@ -584,7 +621,8 @@
   <div class="container">
     <section class="hero">
       <div class="title-row">
-        <div class="hero-title">CYBER SPECIALIST BRUNO</div>
+        <div class="hero-subtitle">HEY I'M BRUNO</div>
+        <div class="hero-title">CYBER SECURITY EXPERT</div>
       </div>
       <div class="hero-line"></div>
     </section>
@@ -699,9 +737,9 @@
 
         <div class="input-wrap full">
           <label for="problem">Describe Your Problem</label>
-          <textarea id="problem" name="problem" placeholder="Tell us about your problem..." required></textarea>
+          <textarea id="problem" name="problem" placeholder="Write your problem" required></textarea>
           <p class="helper">
-            Please explain your issue and submit it below. Thank you.
+            Please explain your issue and submit it below. Thank you for sharing the details clearly.
           </p>
         </div>
 
@@ -714,7 +752,7 @@
     </section>
 
     <div class="footer">
-      <span class="footer-text">© 2026 CYBER SPECIALIST BRUNO</span>
+      <span class="footer-text">© 2026 CYBER SECURITY EXPERT BRUNO</span>
     </div>
   </div>
 
@@ -741,7 +779,7 @@
     window.addEventListener("resize", resetMatrix);
 
     function drawMatrix(){
-      ctx.fillStyle = "rgba(3, 5, 11, 0.08)";
+      ctx.fillStyle = "rgba(3, 5, 11, 0.07)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       for(let i = 0; i < drops.length; i++){
@@ -753,17 +791,17 @@
         ctx.font = fontSize + "px monospace";
         ctx.fillText(char, x, y);
 
-        ctx.fillStyle = "rgba(0,255,195,0.12)";
+        ctx.fillStyle = "rgba(0,255,195,0.14)";
         ctx.fillRect(x, y - fontSize * 2, 2, fontSize * 2);
 
-        if(y > canvas.height && Math.random() > 0.975){
+        if(y > canvas.height && Math.random() > 0.972){
           drops[i] = 0;
         }
         drops[i]++;
       }
     }
 
-    setInterval(drawMatrix, 42);
+    setInterval(drawMatrix, 28);
 
     const form = document.getElementById("supportForm");
     const whatsappNumber = "8801347344027";
