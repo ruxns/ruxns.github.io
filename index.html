@@ -167,6 +167,8 @@
     .hero-container {  
       display: flex;  
       flex-direction: column;  
+      align-items: center; /* কন্টেইনারের ভেতরের সব বক্স একদম সেন্টারে আনবে */  
+      width: 100%;  
       gap: 16px;  
       margin-top: 18px;  
     }  
@@ -190,11 +192,12 @@
       width: 100%;  
     }  
   
-    /* বক্সটি একদম সেন্টারে রাখার জন্য নিখুঁত অ্যালাইনমেন্ট */  
+    /* ১০০০% নিখুঁত সেন্টারিং এবং সমান ডানে-বামে গ্যাপ রাখার জন্য মডিফাইড ক্লাস */  
     .hero-box.bruno-box {  
-      max-width: max-content;   
+      width: auto;  
+      display: inline-flex;     
       margin: 0 auto;           
-      padding: 14px 40px;       
+      padding: 14px 35px;       
     }  
   
     .hero-box::before {  
@@ -249,11 +252,13 @@
       font-family:"Orbitron", sans-serif;  
       font-weight:900;  
       text-transform:uppercase;  
-      letter-spacing:1.5px;  
-      text-indent: 1.5px; /* লেটার স্পেসিং এর জন্য তৈরি হওয়া বাঁকা ভাব দূর করে একদম মাঝে বসাবে */  
+      letter-spacing: 1px;  
       font-size:clamp(1rem, 2.4vw, 1.5rem);  
       line-height:1.2;  
       white-space:nowrap;  
+      display: block;  
+      width: 100%;  
+      text-align: center;  
       background:linear-gradient(  
         90deg,  
         #ffffff 0%,  
@@ -563,7 +568,7 @@
       }  
   
       .hero-box.bruno-box {  
-        padding: 12px 30px;   
+        padding: 12px 24px;   
       }  
   
       .panel{  
