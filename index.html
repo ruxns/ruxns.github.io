@@ -178,23 +178,14 @@
       margin-bottom: 5px; /* নিচের মার্জিন কমানো হয়েছে */
     }  
   
-    .     .round-profile {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      object-fit: cover;
-      /* বর্ডার সাইজ এবং অ্যানিমেশনের জন্য আপডেট */
-      border: 4px solid transparent;
-      background-image: linear-gradient(var(--bg1), var(--bg1)), 
-                        linear-gradient(90deg, #00ffc3, #00d9ff, #9d5cff, #ff4fd8, #00ffc3);
-      background-origin: border-box;
-      background-clip: padding-box, border-box;
-      background-size: 300% 300%;
-      animation: rgbText 5.5s linear infinite; /* আগে থেকেই থাকা কালার অ্যানিমেশন ব্যবহার করা হলো */
-      box-shadow: 0 0 20px rgba(0, 255, 195, 0.4);
-      backdrop-filter: blur(8px);
-    }
-
+    .round-profile {  
+      width: 110px;  
+      height: 110px;  
+      border-radius: 50%;  
+      object-fit: cover;  
+      border: 3px solid var(--neon);  
+      box-shadow: 0 0 15px rgba(0, 255, 195, 0.4);  
+      backdrop-filter: blur(8px);  
     }  
   
     .hero-box {  
@@ -886,4 +877,4 @@ ${problem}`;
     });  
   </script>  
 </body>  
-              </html>
+  </html>
