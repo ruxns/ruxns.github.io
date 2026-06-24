@@ -183,10 +183,38 @@
       height: 110px;  
       border-radius: 50%;  
       object-fit: cover;  
-      border: 3px solid var(--neon);  
+      /* বর্ডার এবং শ্যাডো আপডেট করা হয়েছে RGB লাইটের জন্য */
+      border: 3px solid transparent;  
+      background-image: linear-gradient(var(--bg1), var(--bg1)), linear-gradient(90deg, var(--neon), var(--neon2), var(--pink), var(--purple), var(--green), var(--yellow), var(--neon));
+      background-origin: border-box;
+      background-clip: content-box, border-box;
       box-shadow: 0 0 15px rgba(0, 255, 195, 0.4);  
       backdrop-filter: blur(8px);  
+      /* RGB লাইট অ্যানিমেশন যোগ করা হয়েছে */
+      animation: rgbBorderFlow 10s linear infinite;
     }  
+
+    /* RGB বর্ডার অ্যানিমেশন কিফ্রেম */
+    @keyframes rgbBorderFlow {
+      0% {
+        background-image: linear-gradient(var(--bg1), var(--bg1)), linear-gradient(0deg, var(--neon), var(--neon2), var(--pink), var(--purple), var(--green), var(--yellow), var(--neon));
+        box-shadow: 0 0 15px rgba(0, 255, 195, 0.4);
+      }
+      25% {
+        box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+      }
+      50% {
+        background-image: linear-gradient(var(--bg1), var(--bg1)), linear-gradient(180deg, var(--neon), var(--neon2), var(--pink), var(--purple), var(--green), var(--yellow), var(--neon));
+        box-shadow: 0 0 15px rgba(255, 79, 216, 0.4);
+      }
+      75% {
+        box-shadow: 0 0 15px rgba(157, 92, 255, 0.4);
+      }
+      100% {
+        background-image: linear-gradient(var(--bg1), var(--bg1)), linear-gradient(360deg, var(--neon), var(--neon2), var(--pink), var(--purple), var(--green), var(--yellow), var(--neon));
+        box-shadow: 0 0 15px rgba(0, 255, 195, 0.4);
+      }
+    }
   
     .hero-box {  
       position: relative;  
@@ -877,4 +905,4 @@ ${problem}`;
     });  
   </script>  
 </body>  
-  </html>
+</html>
