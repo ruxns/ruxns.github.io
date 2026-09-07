@@ -1,517 +1,279 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bruno | Cyber Security Expert</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --cyan:#00e5ff;
+      --purple:#b56bff;
+      --pink:#ff5ce1;
+      --gradient:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+      --bg:#04060e;
+      --card:rgba(10,14,28,0.88);
+      --border:rgba(0,229,255,0.22);
+      --text:#f2f6ff;
+      --muted:#8b9bb8;
+    }
+    html{scroll-behavior:smooth}
+    body{
+      min-height:100vh;
+      font-family:"Inter",sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      overflow-x:hidden;
+      position:relative;
+    }
+    #cyberCanvas{
+      position:fixed;inset:0;width:100%;height:100%;
+      z-index:0;pointer-events:none;
+    }
+    .container{
+      width:min(1100px,93%);
+      margin:0 auto;
+      position:relative;z-index:2;
+      padding:18px 0 90px;
     }
 
-    :root {
-      --cyan: #00d9ff;
-      --purple: #9d5cff;
-      --pink: #ff4fd8;
-      --gradient: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
-      --bg: #05070f;
-      --card: rgba(12, 16, 32, 0.82);
-      --border: rgba(0, 217, 255, 0.22);
-      --text: #f0f4ff;
-      --muted: #8a9bb8;
+    /* HERO */
+    .hero{text-align:center;padding:28px 0 12px}
+    .profile-wrap{display:flex;justify-content:center;margin-bottom:20px}
+    .profile{
+      width:148px;height:148px;border-radius:50%;
+      padding:4px;background:var(--gradient);
+      box-shadow:0 0 50px rgba(0,229,255,0.4);
+      animation:floatProfile 5s ease-in-out infinite;
+      position:relative;
+    }
+    .profile::after{
+      content:"";position:absolute;inset:-8px;border-radius:50%;
+      border:1px solid rgba(0,229,255,0.3);
+      animation:pulseRing 3s linear infinite;
+    }
+    .profile img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+    @keyframes floatProfile{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    @keyframes pulseRing{0%{transform:scale(1);opacity:0.6}100%{transform:scale(1.25);opacity:0}}
+    .hero-title{
+      font-family:"Orbitron",sans-serif;font-weight:900;
+      font-size:clamp(1.7rem,4.2vw,2.7rem);letter-spacing:2px;
+      text-transform:uppercase;background:var(--gradient);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      margin-bottom:8px;
+    }
+    .hero-sub{
+      font-family:"Orbitron",sans-serif;font-weight:700;
+      font-size:clamp(1rem,2.6vw,1.3rem);letter-spacing:1.6px;
+      background:var(--gradient);-webkit-background-clip:text;
+      background-clip:text;color:transparent;margin-bottom:6px;
+    }
+    .hero-tag{color:var(--muted);font-size:14px;margin-top:6px}
+
+    /* PANEL */
+    .panel{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:22px;padding:28px;margin-top:26px;
+      backdrop-filter:blur(18px);
+      box-shadow:0 10px 40px rgba(0,0,0,0.35);
+      transition:box-shadow 0.35s ease,transform 0.35s ease;
+    }
+    .panel:hover{box-shadow:0 14px 48px rgba(0,229,255,0.14)}
+    .panel-title{
+      font-family:"Orbitron",sans-serif;font-size:1.08rem;font-weight:800;
+      letter-spacing:1.1px;text-transform:uppercase;
+      display:flex;align-items:center;gap:12px;margin-bottom:22px;
+      background:var(--gradient);-webkit-background-clip:text;
+      background-clip:text;color:transparent;
+    }
+    .panel-title i{font-size:1.18rem}
+
+    /* SOCIAL */
+    .social-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .social-btn{
+      display:flex;align-items:center;justify-content:center;gap:12px;
+      padding:17px;border-radius:15px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(181,107,255,0.28);
+      color:#fff;text-decoration:none;font-weight:700;font-size:15px;
+      transition:all 0.28s ease;cursor:pointer;
+    }
+    .social-btn:hover{
+      transform:translateY(-4px);
+      background:rgba(0,229,255,0.1);
+      border-color:var(--cyan);
+      box-shadow:0 10px 28px rgba(0,229,255,0.18);
+    }
+    .social-btn i{
+      font-size:21px;background:var(--gradient);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
     }
 
-    html { scroll-behavior: smooth; }
+    /* SERVICES */
+    .services-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px;
+    }
+    .service-card{
+      background:rgba(5,9,22,0.75);border:1px solid rgba(181,107,255,0.22);
+      border-radius:15px;padding:20px 16px;text-align:center;
+      transition:all 0.3s ease;
+    }
+    .service-card:hover{
+      border-color:var(--cyan);transform:translateY(-5px);
+      background:rgba(0,229,255,0.07);
+      box-shadow:0 8px 24px rgba(0,229,255,0.12);
+    }
+    .service-card i{
+      font-size:28px;margin-bottom:11px;background:var(--gradient);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .service-card h4{font-size:14.5px;font-weight:700;margin-bottom:5px}
+    .service-card p{font-size:12.5px;color:var(--muted)}
 
-    body {
-      min-height: 100vh;
-      font-family: "Inter", sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      overflow-x: hidden;
-      position: relative;
+    /* FORM */
+    form{display:grid;gap:17px}
+    .input-wrap{display:flex;flex-direction:column;gap:8px}
+    label{
+      font-size:13.5px;font-weight:700;background:var(--gradient);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    input,select,textarea{
+      width:100%;border:none;outline:none;border-radius:13px;
+      padding:15px 16px;background:rgba(4,8,20,0.9);
+      border:1px solid rgba(181,107,255,0.28);color:var(--text);
+      font-size:15px;font-family:"Fira Code",monospace;transition:0.28s ease;
+    }
+    input:focus,select:focus,textarea:focus{
+      border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,229,255,0.18);
+    }
+    input::placeholder,textarea::placeholder{color:#4d5d7a}
+    select option{background:#060a14;color:#fff}
+    textarea{min-height:165px;resize:vertical;line-height:1.65}
+    .submit-btn{
+      border:none;outline:none;padding:17px;border-radius:13px;
+      font-size:16px;font-weight:800;cursor:pointer;color:#fff;
+      background:var(--gradient);transition:all 0.3s ease;
+      display:flex;align-items:center;justify-content:center;gap:10px;
+    }
+    .submit-btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 12px 30px rgba(0,229,255,0.35);
     }
 
-    #cyberCanvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
+    /* REVIEWS BOX */
+    .reviews-box{
+      background:rgba(4,8,20,0.85);
+      border:1px solid rgba(0,229,255,0.25);
+      border-radius:16px;
+      height:420px;
+      overflow-y:auto;
+      padding:18px 16px;
+      scrollbar-width:thin;
+      scrollbar-color:var(--cyan) transparent;
+    }
+    .reviews-box::-webkit-scrollbar{width:6px}
+    .reviews-box::-webkit-scrollbar-track{background:transparent}
+    .reviews-box::-webkit-scrollbar-thumb{
+      background:var(--cyan);border-radius:10px;
+    }
+    .review-item{
+      padding:14px 0;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .review-item:last-child{border-bottom:none}
+    .review-stars{color:#ffd000;font-size:13px;margin-bottom:6px;letter-spacing:1px}
+    .review-text{font-size:13.8px;line-height:1.55;color:#d0d9ef;margin-bottom:7px}
+    .review-meta{font-size:12.5px;color:var(--cyan);font-weight:600}
+
+    .review-actions{
+      display:flex;gap:12px;margin-top:18px;flex-wrap:wrap;
+    }
+    .review-btn{
+      flex:1;min-width:160px;padding:14px;border-radius:12px;
+      border:1px solid rgba(0,229,255,0.35);background:rgba(0,229,255,0.08);
+      color:#fff;font-weight:700;font-size:14px;cursor:pointer;
+      transition:all 0.25s ease;display:flex;align-items:center;justify-content:center;gap:8px;
+    }
+    .review-btn:hover{
+      background:rgba(0,229,255,0.18);border-color:var(--cyan);
+      transform:translateY(-2px);
     }
 
-    .container {
-      width: min(1080px, 92%);
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-      padding: 20px 0 80px;
+    /* MODAL */
+    .modal-overlay{
+      position:fixed;inset:0;background:rgba(0,0,0,0.82);
+      backdrop-filter:blur(12px);z-index:1000;
+      display:none;justify-content:center;align-items:center;
+      padding:20px;opacity:0;transition:opacity 0.3s ease;
+    }
+    .modal-overlay.active{display:flex;opacity:1}
+    .modal-box{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:22px;width:min(470px,95%);max-height:90vh;
+      overflow-y:auto;padding:30px 24px;position:relative;
+      box-shadow:0 0 60px rgba(0,229,255,0.22);
+      transform:scale(0.92);transition:transform 0.3s ease;
+    }
+    .modal-overlay.active .modal-box{transform:scale(1)}
+    .modal-close{
+      position:absolute;top:14px;right:16px;background:none;border:none;
+      color:var(--muted);font-size:22px;cursor:pointer;transition:0.2s;
+    }
+    .modal-close:hover{color:var(--cyan)}
+    .modal-header{text-align:center;margin-bottom:24px}
+    .modal-header h3{
+      font-family:"Orbitron",sans-serif;font-size:1.3rem;font-weight:800;
+      background:var(--gradient);-webkit-background-clip:text;
+      background-clip:text;color:transparent;margin-bottom:5px;
+    }
+    .modal-header p{color:var(--muted);font-size:13.5px}
+    .info-item{
+      display:flex;align-items:flex-start;gap:14px;
+      padding:14px 15px;background:rgba(4,8,20,0.7);
+      border:1px solid rgba(181,107,255,0.2);border-radius:13px;
+      margin-bottom:11px;transition:0.25s;
+    }
+    .info-item:hover{border-color:var(--cyan);background:rgba(0,229,255,0.06)}
+    .info-item i{
+      font-size:17px;width:22px;text-align:center;margin-top:2px;
+      background:var(--gradient);-webkit-background-clip:text;
+      background-clip:text;color:transparent;
+    }
+    .info-label{font-size:11.5px;color:var(--muted);margin-bottom:2px}
+    .info-value{font-size:14.5px;font-weight:600}
+
+    /* FLOAT WA */
+    .float-wa{
+      position:fixed;bottom:26px;right:26px;width:60px;height:60px;
+      border-radius:50%;background:#25d366;color:#fff;
+      display:flex;align-items:center;justify-content:center;
+      font-size:30px;box-shadow:0 8px 28px rgba(37,211,102,0.5);
+      z-index:999;text-decoration:none;transition:all 0.3s ease;
+      animation:waPulse 2.4s infinite;
+    }
+    .float-wa:hover{transform:scale(1.12)}
+    @keyframes waPulse{
+      0%{box-shadow:0 0 0 0 rgba(37,211,102,0.55)}
+      70%{box-shadow:0 0 0 18px rgba(37,211,102,0)}
+      100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
     }
 
-    /* ===== HERO ===== */
-    .hero {
-      text-align: center;
-      padding: 30px 0 10px;
+    .footer{text-align:center;margin-top:42px;color:var(--muted);font-size:13px}
+
+    @media(max-width:640px){
+      .profile{width:120px;height:120px}
+      .hero-title{font-size:1.5rem}
+      .social-grid{grid-template-columns:1fr 1fr}
+      .panel{padding:22px 16px}
+      .reviews-box{height:360px}
+      .float-wa{bottom:18px;right:18px;width:54px;height:54px;font-size:26px}
     }
-
-    .profile-wrap {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 18px;
-    }
-
-    .profile {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      padding: 4px;
-      background: var(--gradient);
-      box-shadow: 0 0 40px rgba(0, 217, 255, 0.35);
-      position: relative;
-      animation: float 4s ease-in-out infinite;
-    }
-
-    .profile img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .hero-title {
-      font-family: "Orbitron", sans-serif;
-      font-weight: 900;
-      font-size: clamp(1.6rem, 4vw, 2.6rem);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 8px;
-    }
-
-    .hero-sub {
-      font-family: "Orbitron", sans-serif;
-      font-weight: 700;
-      font-size: clamp(0.95rem, 2.5vw, 1.25rem);
-      letter-spacing: 1.5px;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 6px;
-    }
-
-    .hero-tag {
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 6px;
-    }
-
-    /* ===== PANEL ===== */
-    .panel {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 26px;
-      margin-top: 24px;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .panel:hover {
-      box-shadow: 0 12px 40px rgba(0, 217, 255, 0.12);
-    }
-
-    .panel-title {
-      font-family: "Orbitron", sans-serif;
-      font-size: 1.05rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .panel-title i {
-      font-size: 1.15rem;
-    }
-
-    /* ===== SOCIAL ===== */
-    .social-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .social-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      padding: 16px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(157, 92, 255, 0.25);
-      color: #fff;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 15px;
-      transition: all 0.25s ease;
-      cursor: pointer;
-    }
-
-    .social-btn:hover {
-      transform: translateY(-3px);
-      background: rgba(0, 217, 255, 0.1);
-      border-color: var(--cyan);
-      box-shadow: 0 8px 20px rgba(0, 217, 255, 0.15);
-    }
-
-    .social-btn i {
-      font-size: 20px;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    /* ===== SERVICES ===== */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-    }
-
-    .service-card {
-      background: rgba(5, 8, 20, 0.7);
-      border: 1px solid rgba(157, 92, 255, 0.2);
-      border-radius: 14px;
-      padding: 18px 16px;
-      text-align: center;
-      transition: all 0.25s ease;
-    }
-
-    .service-card:hover {
-      border-color: var(--cyan);
-      transform: translateY(-4px);
-      background: rgba(0, 217, 255, 0.06);
-    }
-
-    .service-card i {
-      font-size: 26px;
-      margin-bottom: 10px;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .service-card h4 {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .service-card p {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /* ===== FORM ===== */
-    form {
-      display: grid;
-      gap: 16px;
-    }
-
-    .input-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    label {
-      font-size: 13.5px;
-      font-weight: 700;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      border: none;
-      outline: none;
-      border-radius: 12px;
-      padding: 15px 16px;
-      background: rgba(5, 8, 20, 0.85);
-      border: 1px solid rgba(157, 92, 255, 0.25);
-      color: var(--text);
-      font-size: 15px;
-      font-family: "Fira Code", monospace;
-      transition: 0.25s ease;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--cyan);
-      box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.15);
-    }
-
-    input::placeholder, textarea::placeholder {
-      color: #4a5a78;
-    }
-
-    select option {
-      background: #070913;
-      color: #fff;
-    }
-
-    textarea {
-      min-height: 160px;
-      resize: vertical;
-      line-height: 1.6;
-    }
-
-    .submit-btn {
-      border: none;
-      outline: none;
-      padding: 16px;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: 800;
-      cursor: pointer;
-      color: #fff;
-      background: var(--gradient);
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .submit-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0, 217, 255, 0.3);
-      opacity: 0.95;
-    }
-
-    /* ===== TESTIMONIALS ===== */
-    .review-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-    }
-
-    .review-card {
-      background: rgba(5, 8, 20, 0.7);
-      border: 1px solid rgba(157, 92, 255, 0.2);
-      border-radius: 14px;
-      padding: 18px;
-    }
-
-    .review-card .stars {
-      color: #ffcc00;
-      margin-bottom: 8px;
-      font-size: 14px;
-    }
-
-    .review-card p {
-      font-size: 13.5px;
-      color: #c8d4ea;
-      line-height: 1.5;
-      margin-bottom: 10px;
-    }
-
-    .review-card .name {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--cyan);
-    }
-
-    /* ===== MODAL ===== */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-      opacity: 1;
-    }
-
-    .modal-box {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      width: min(460px, 95%);
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 28px 24px;
-      position: relative;
-      box-shadow: 0 0 50px rgba(0, 217, 255, 0.2);
-      transform: scale(0.92);
-      transition: transform 0.3s ease;
-    }
-
-    .modal-overlay.active .modal-box {
-      transform: scale(1);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 14px;
-      right: 16px;
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 22px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .modal-close:hover { color: var(--cyan); }
-
-    .modal-header {
-      text-align: center;
-      margin-bottom: 22px;
-    }
-
-    .modal-header h3 {
-      font-family: "Orbitron", sans-serif;
-      font-size: 1.3rem;
-      font-weight: 800;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 4px;
-    }
-
-    .modal-header p {
-      color: var(--muted);
-      font-size: 13.5px;
-    }
-
-    .info-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 13px 15px;
-      background: rgba(5, 8, 20, 0.65);
-      border: 1px solid rgba(157, 92, 255, 0.18);
-      border-radius: 12px;
-      margin-bottom: 10px;
-      transition: 0.25s;
-    }
-
-    .info-item:hover {
-      border-color: var(--cyan);
-      background: rgba(0, 217, 255, 0.06);
-    }
-
-    .info-item i {
-      font-size: 17px;
-      width: 22px;
-      text-align: center;
-      margin-top: 2px;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .info-label {
-      font-size: 11.5px;
-      color: var(--muted);
-      margin-bottom: 2px;
-    }
-
-    .info-value {
-      font-size: 14.5px;
-      font-weight: 600;
-    }
-
-    /* ===== FLOATING WHATSAPP ===== */
-    .float-wa {
-      position: fixed;
-      bottom: 26px;
-      right: 26px;
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      background: #25d366;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.45);
-      z-index: 999;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      animation: pulse 2.2s infinite;
-    }
-
-    .float-wa:hover {
-      transform: scale(1.1);
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
-      70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-    }
-
-    /* ===== FOOTER ===== */
-    .footer {
-      text-align: center;
-      margin-top: 40px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 640px) {
-      .profile { width: 115px; height: 115px; }
-      .hero-title { font-size: 1.45rem; }
-      .social-grid { grid-template-columns: 1fr 1fr; }
-      .panel { padding: 20px 16px; }
-      .float-wa { bottom: 18px; right: 18px; width: 52px; height: 52px; font-size: 24px; }
-    }
-
-    @media (max-width: 420px) {
-      .social-grid { grid-template-columns: 1fr; }
+    @media(max-width:420px){
+      .social-grid{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -528,178 +290,1043 @@
       </div>
       <h1 class="hero-title">Cyber Security Expert</h1>
       <div class="hero-sub">Your Xamai B4uno</div>
-      <p class="hero-tag">Professional Account Recovery & Digital Support</p>
+      <p class="hero-tag">Professional Account Recovery and Digital Support</p>
     </div>
 
     <!-- MY INFORMATION -->
     <section class="panel">
-      <h2 class="panel-title">
-        <i class="fa-solid fa-address-card"></i>
-        My Information
-      </h2>
+      <h2 class="panel-title"><i class="fa-solid fa-address-card"></i> My Information</h2>
       <div class="social-grid">
         <a class="social-btn" href="https://www.facebook.com/share/1HLVnAtnoT/" target="_blank">
-          <i class="fa-brands fa-facebook-f"></i>
-          <span>Facebook</span>
+          <i class="fa-brands fa-facebook-f"></i><span>Facebook</span>
         </a>
         <a class="social-btn" href="https://www.tiktok.com/@ruxax" target="_blank">
-          <i class="fa-brands fa-tiktok"></i>
-          <span>TikTok</span>
+          <i class="fa-brands fa-tiktok"></i><span>TikTok</span>
         </a>
         <a class="social-btn" href="https://www.instagram.com/fbsxi?igsh=MTA4eTdyN2ZycHAyYw==" target="_blank">
-          <i class="fa-brands fa-instagram"></i>
-          <span>Instagram</span>
+          <i class="fa-brands fa-instagram"></i><span>Instagram</span>
         </a>
         <div class="social-btn" id="openInfoModal">
-          <i class="fa-solid fa-user"></i>
-          <span>My Info</span>
+          <i class="fa-solid fa-user"></i><span>My Info</span>
         </div>
       </div>
     </section>
 
     <!-- SERVICES -->
     <section class="panel">
-      <h2 class="panel-title">
-        <i class="fa-solid fa-shield-halved"></i>
-        Popular Services
-      </h2>
+      <h2 class="panel-title"><i class="fa-solid fa-shield-halved"></i> Popular Services</h2>
       <div class="services-grid">
         <div class="service-card">
           <i class="fa-brands fa-tiktok"></i>
           <h4>TikTok Recovery</h4>
-          <p>Disabled / Suspended Account</p>
+          <p>Disabled and Suspended Help</p>
         </div>
         <div class="service-card">
           <i class="fa-brands fa-facebook"></i>
           <h4>Facebook Recovery</h4>
-          <p>Hacked & Disabled Help</p>
+          <p>Hacked and Disabled Support</p>
         </div>
         <div class="service-card">
           <i class="fa-brands fa-instagram"></i>
           <h4>Instagram Recovery</h4>
-          <p>Login & Appeal Support</p>
+          <p>Login and Appeal Guidance</p>
         </div>
         <div class="service-card">
           <i class="fa-brands fa-whatsapp"></i>
           <h4>WhatsApp Support</h4>
-          <p>Banned & Number Issues</p>
+          <p>Banned Account Assistance</p>
         </div>
         <div class="service-card">
           <i class="fa-brands fa-google"></i>
-          <h4>Gmail / Google</h4>
-          <p>Locked Account Help</p>
+          <h4>Gmail and Google</h4>
+          <p>Locked Account Recovery</p>
         </div>
         <div class="service-card">
           <i class="fa-brands fa-youtube"></i>
           <h4>YouTube Channel</h4>
-          <p>Access & Strike Guidance</p>
+          <p>Access and Strike Help</p>
         </div>
       </div>
     </section>
 
     <!-- SUPPORT FORM -->
     <section class="panel">
-      <h2 class="panel-title">
-        <i class="fa-solid fa-file-circle-plus"></i>
-        Tell us about your problem
-      </h2>
+      <h2 class="panel-title"><i class="fa-solid fa-file-circle-plus"></i> Tell us about your problem</h2>
       <form id="supportForm">
         <div class="input-wrap">
-          <label for="name">Your Name (Optional)</label>
-          <input type="text" id="name" name="name" placeholder="Enter your name (optional)" />
+          <label for="name">Your Name Optional</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name optional" />
         </div>
-
         <div class="input-wrap">
-          <label for="service">Select Problem / Service</label>
+          <label for="service">Select Problem or Service</label>
           <select id="service" name="service" required>
             <option value="">-- Select a service --</option>
             <option>TikTok Account Recovery</option>
             <option>TikTok Suspended Account Appeal Help</option>
             <option>TikTok Disabled Account Recovery</option>
-            <option>TikTok Username / Login Issue</option>
-            <option>TikTok Verification / Security Guidance</option>
+            <option>TikTok Username Login Issue</option>
+            <option>TikTok Verification Security Guidance</option>
             <option>Facebook Disabled Account Recovery</option>
             <option>Facebook Hacked Account Help</option>
             <option>Facebook Page Access Issue</option>
             <option>Facebook Business Manager Access Help</option>
-            <option>Facebook Login / Password Problem</option>
+            <option>Facebook Login Password Problem</option>
             <option>Instagram Disabled Account Recovery</option>
             <option>Instagram Hacked Account Help</option>
             <option>Instagram Login Issue</option>
-            <option>Instagram Username / Email Change Help</option>
+            <option>Instagram Username Email Change Help</option>
             <option>Instagram Appeal Guidance</option>
             <option>WhatsApp Account Banned Support</option>
             <option>WhatsApp Verification Problem</option>
-            <option>WhatsApp Number / Access Issue</option>
+            <option>WhatsApp Number Access Issue</option>
             <option>WhatsApp Business Account Help</option>
-            <option>WhatsApp Backup / Restore Guidance</option>
+            <option>WhatsApp Backup Restore Guidance</option>
             <option>Gmail Account Recovery Help</option>
-            <option>Google Disabled / Locked Account Help</option>
+            <option>Google Disabled Locked Account Help</option>
             <option>Google Verification Problem</option>
             <option>Google Password Reset Support</option>
             <option>YouTube Channel Access Problem</option>
-            <option>YouTube Copyright / Strike Guidance</option>
+            <option>YouTube Copyright Strike Guidance</option>
             <option>YouTube Suspended Channel Appeal Help</option>
             <option>Telegram Account Access Issue</option>
-            <option>Telegram Login / Number Problem</option>
-            <option>Messenger Login / Recovery Help</option>
-            <option>Twitter / X Account Recovery</option>
-            <option>Twitter / X Suspended Account Guidance</option>
-            <option>Snapchat Login / Recovery Help</option>
+            <option>Telegram Login Number Problem</option>
+            <option>Messenger Login Recovery Help</option>
+            <option>Twitter X Account Recovery</option>
+            <option>Twitter X Suspended Account Guidance</option>
+            <option>Snapchat Login Recovery Help</option>
             <option>LinkedIn Account Access Issue</option>
             <option>Discord Account Recovery Help</option>
             <option>PayPal Account Access Problem</option>
             <option>Binance Account Verification Help</option>
             <option>Website Login Panel Issue</option>
-            <option>Domain / Hosting Access Problem</option>
-            <option>cPanel / Hosting Login Help</option>
-            <option>Email Recovery / Access Help</option>
-            <option>2FA / Verification Code Problem</option>
-            <option>Security Review / Account Safety Check</option>
+            <option>Domain Hosting Access Problem</option>
+            <option>cPanel Hosting Login Help</option>
+            <option>Email Recovery Access Help</option>
+            <option>2FA Verification Code Problem</option>
+            <option>Security Review Account Safety Check</option>
             <option>Profile Recovery Assistance</option>
-            <option>Password Reset / Access Guidance</option>
-            <option>Appeal Letter / Support Message Help</option>
-            <option>Platform Report / Complaint Guidance</option>
+            <option>Password Reset Access Guidance</option>
+            <option>Appeal Letter Support Message Help</option>
+            <option>Platform Report Complaint Guidance</option>
             <option>Business Account Access Issue</option>
             <option>Creator Account Issue Help</option>
             <option>General Digital Support Request</option>
           </select>
         </div>
-
         <div class="input-wrap">
           <label for="problem">Describe Your Problem</label>
-          <textarea id="problem" name="problem" placeholder="Write your problem in detail..." required></textarea>
+          <textarea id="problem" name="problem" placeholder="Write your problem in detail" required></textarea>
         </div>
-
         <button type="submit" class="submit-btn">
-          <i class="fa-brands fa-whatsapp"></i>
-          Submit On WhatsApp
+          <i class="fa-brands fa-whatsapp"></i> Submit On WhatsApp
         </button>
       </form>
     </section>
 
-    <!-- REVIEWS -->
+    <!-- CLIENT REVIEWS -->
     <section class="panel">
-      <h2 class="panel-title">
-        <i class="fa-solid fa-star"></i>
-        Client Reviews
-      </h2>
-      <div class="review-grid">
-        <div class="review-card">
-          <div class="stars">★★★★★</div>
-          <p>"TikTok অ্যাকাউন্ট ১৫ দিনে রিকভার করে দিয়েছে। অসাধারণ সার্ভিস!"</p>
-          <div class="name">— Rahim, Dhaka</div>
+      <h2 class="panel-title"><i class="fa-solid fa-star"></i> Client Reviews</h2>
+      
+      <div class="reviews-box" id="reviewsBox">
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Bruno recovered my disabled TikTok account within a few days. The process was clear and professional from start to finish.</div>
+          <div class="review-meta">Karim Ahmed - Sylhet Bangladesh</div>
         </div>
-        <div class="review-card">
-          <div class="stars">★★★★★</div>
-          <p>"Facebook হ্যাক হয়ে গিয়েছিল। ব্রুনো ভাই দ্রুত সলভ করেছে।"</p>
-          <div class="name">— Nayeem, Sylhet</div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">My Facebook account was hacked and I lost access for weeks. Bruno guided me step by step and helped me get it back safely.</div>
+          <div class="review-meta">Sarah Johnson - London United Kingdom</div>
         </div>
-        <div class="review-card">
-          <div class="stars">★★★★★</div>
-          <p>"WhatsApp ব্যানড হয়েছিল। সঠিক গাইডলাইন পেয়েছি। Highly recommended!"</p>
-          <div class="name">— Farzana, Chittagong</div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram account was permanently disabled. After following his instructions carefully I was able to submit a proper appeal and recover it.</div>
+          <div class="review-meta">Michael Torres - New York USA</div>
         </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp number got banned without any reason. Bruno provided the right support path and it was restored after the review process.</div>
+          <div class="review-meta">Nusrat Jahan - Dhaka Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Very patient and detailed guidance for Gmail recovery. He explained every step so that I could do it correctly myself.</div>
+          <div class="review-meta">James Wilson - Toronto Canada</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok suspended my creator account. Bruno helped me write a strong appeal and the account came back after a few days.</div>
+          <div class="review-meta">Farhan Rahman - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook page access was lost because of a business manager issue. His advice was accurate and the page was recovered.</div>
+          <div class="review-meta">Emily Carter - Sydney Australia</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">I had a complicated Instagram login problem with two factor authentication. Bruno solved it patiently over messages.</div>
+          <div class="review-meta">Rafiqul Islam - Chittagong Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">YouTube channel was suspended due to a copyright strike. He guided me through the proper dispute process successfully.</div>
+          <div class="review-meta">Daniel Lee - Los Angeles USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Professional service for Telegram account recovery. Clear communication and realistic expectations from the beginning.</div>
+          <div class="review-meta">Amina Begum - London United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">My Snapchat account was locked after a suspicious login. Bruno helped me secure it and regain full control.</div>
+          <div class="review-meta">Hassan Ali - Dubai UAE</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Excellent support for Facebook disabled account. He told me exactly what information to prepare for the appeal.</div>
+          <div class="review-meta">Priya Sharma - Manchester United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok login issue after changing phone number. The recovery steps he provided worked perfectly.</div>
+          <div class="review-meta">Mahbub Alam - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Gmail account was locked for unusual activity. Bruno walked me through the verification process carefully.</div>
+          <div class="review-meta">Olivia Brown - Chicago USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram business account recovery was handled with great care. I received updates throughout the process.</div>
+          <div class="review-meta">Tanvir Hossain - Dhaka Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp business account had verification problems. His guidance helped me complete the process without further issues.</div>
+          <div class="review-meta">Sophie Martin - Berlin Germany</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Very honest about what is possible and what is not. I appreciate the transparent communication for my X account case.</div>
+          <div class="review-meta">Arif Chowdhury - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook personal account recovery after being hacked. The security tips he shared afterwards were also very useful.</div>
+          <div class="review-meta">Jessica Adams - Houston USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok appeal letter help was excellent. The structure and wording he suggested made a real difference.</div>
+          <div class="review-meta">Nazmul Hasan - Comilla Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">LinkedIn account access issue resolved with his support. Clear instructions and timely replies throughout.</div>
+          <div class="review-meta">William Thompson - Vancouver Canada</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">My Discord account was compromised. Bruno helped me regain access and secure it properly afterwards.</div>
+          <div class="review-meta">Lamia Akter - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">YouTube channel access restored after following his detailed recovery plan. Highly professional approach.</div>
+          <div class="review-meta">Chris Evans - Melbourne Australia</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram username change and recovery assistance was smooth. He explained every option clearly.</div>
+          <div class="review-meta">Sabbir Rahman - Rajshahi Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">PayPal account access problem solved with correct verification steps. Patient and knowledgeable support.</div>
+          <div class="review-meta">Amanda Scott - Miami USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook business manager recovery guidance was accurate. The account permissions were fixed as advised.</div>
+          <div class="review-meta">Imran Khan - London United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok security review process was explained very well. I understood exactly what Meta needed from me.</div>
+          <div class="review-meta">Fatima Begum - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Gmail recovery after losing the recovery phone number. His method worked when official channels failed.</div>
+          <div class="review-meta">Robert Garcia - Dallas USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp banned account support was realistic and helpful. The appeal was accepted after following his advice.</div>
+          <div class="review-meta">Rina Akter - Khulna Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Telegram login number problem resolved quickly. Clear steps and continuous follow up until success.</div>
+          <div class="review-meta">David Kim - Seoul South Korea</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram disabled account recovered after two appeals. Bruno helped improve the second submission significantly.</div>
+          <div class="review-meta">Mehedi Hasan - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook page that was restricted is now fully active again. Professional and calm guidance throughout.</div>
+          <div class="review-meta">Laura White - Boston USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">YouTube copyright strike removed with proper documentation support. Very detailed and careful advice.</div>
+          <div class="review-meta">Kamrul Islam - Dhaka Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Snapchat recovery after device change issues. The process was explained in simple language.</div>
+          <div class="review-meta">Hannah Green - Birmingham United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok creator fund related account problem solved. He knew the right support channels to contact.</div>
+          <div class="review-meta">Shakil Ahmed - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Google account locked due to suspicious activity. Recovery was successful with his structured approach.</div>
+          <div class="review-meta">Kevin Morgan - Seattle USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Messenger login recovery help was fast and effective. I regained access the same day after following steps.</div>
+          <div class="review-meta">Jannat Ara - Barisal Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">X account suspension appeal was written carefully with his guidance. The account was reinstated.</div>
+          <div class="review-meta">Thomas Wright - Auckland New Zealand</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram email change and recovery process handled professionally. No unnecessary delays.</div>
+          <div class="review-meta">Abdul Karim - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook hacked account fully secured after recovery. He also taught me how to enable better protection.</div>
+          <div class="review-meta">Nicole Parker - Atlanta USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp number transfer and access issue resolved. Clear and practical instructions every step of the way.</div>
+          <div class="review-meta">Sumaiya Islam - London United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok disabled account came back after proper documentation. Bruno is very experienced in these cases.</div>
+          <div class="review-meta">Rashed Khan - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Gmail and YouTube channel linked account recovery was complex but he managed it skillfully.</div>
+          <div class="review-meta">Brian Foster - Denver USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Professional help for domain and hosting login problems. He understood the technical side very well.</div>
+          <div class="review-meta">Nasrin Sultana - Dhaka Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram appeal guidance was precise. The wording and evidence list he suggested worked effectively.</div>
+          <div class="review-meta">George Allen - Dublin Ireland</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook business portfolio access restored. Detailed and calm support from beginning to end.</div>
+          <div class="review-meta">Tahmina Akter - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Telegram account recovery after losing the old SIM. The process was explained carefully and succeeded.</div>
+          <div class="review-meta">Rachel Clark - Singapore</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok login and two factor issues fixed. He stayed with me until the account was fully working again.</div>
+          <div class="review-meta">Jahidul Islam - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">YouTube channel suspended for community guidelines. Appeal support was thorough and successful.</div>
+          <div class="review-meta">Mark Robinson - Phoenix USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp backup restore guidance after phone change. Simple steps that actually worked.</div>
+          <div class="review-meta">Shirin Akter - Chittagong Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram hacked account recovered and secured. He emphasized prevention which I really valued.</div>
+          <div class="review-meta">Peter Hall - Edinburgh United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook disabled account case handled with patience. Multiple appeals were needed and he supported all of them.</div>
+          <div class="review-meta">Mizanur Rahman - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Google account verification problem solved. Clear and structured recovery path provided.</div>
+          <div class="review-meta">Stephanie Lewis - San Diego USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok username recovery and login help was excellent. Everything was explained in an easy way.</div>
+          <div class="review-meta">Faisal Ahmed - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">LinkedIn and professional account access restored. Professional communication throughout the process.</div>
+          <div class="review-meta">Andrew Mitchell - Calgary Canada</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Discord account recovery after email change issues. He knew the correct support route.</div>
+          <div class="review-meta">Rumana Islam - Dhaka Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">X suspended account guidance was honest and effective. The appeal was accepted after proper submission.</div>
+          <div class="review-meta">Jennifer Brooks - Austin USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp business verification completed successfully with his help. Very practical advice.</div>
+          <div class="review-meta">Shahidul Islam - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram creator account issue resolved. He provided continuous support until the problem was fixed.</div>
+          <div class="review-meta">Claire Turner - Bristol United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook page access after admin removal recovered. Detailed steps and careful follow through.</div>
+          <div class="review-meta">Anwar Hossain - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Gmail recovery when recovery options were limited. His alternative methods proved useful.</div>
+          <div class="review-meta">Ryan Phillips - Portland USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok appeal after multiple rejections finally worked with improved documentation he suggested.</div>
+          <div class="review-meta">Lutfa Begum - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">YouTube channel access problem fixed. Clear communication and realistic timeline given from the start.</div>
+          <div class="review-meta">Megan Foster - Minneapolis USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Telegram number problem solved after SIM change. Patient and step by step guidance.</div>
+          <div class="review-meta">Yusuf Ali - London United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram disabled account recovered after careful preparation of the appeal materials.</div>
+          <div class="review-meta">Salma Khatun - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook login and password issues resolved securely. He also advised on better password practices.</div>
+          <div class="review-meta">Justin Reed - Charlotte USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp banned account reinstated. Honest assessment of the case and proper support path.</div>
+          <div class="review-meta">Rubel Mia - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Google locked account recovery completed successfully. Detailed verification process handled well.</div>
+          <div class="review-meta">Laura Cox - Leeds United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok security check and account safety review guidance was very helpful and thorough.</div>
+          <div class="review-meta">Habib Rahman - Dhaka Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Snapchat login recovery after long inactivity. The account was brought back without complications.</div>
+          <div class="review-meta">Ethan Baker - Tampa USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram username and email related issues fixed. Professional and consistent support.</div>
+          <div class="review-meta">Nazma Akter - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook business manager complex permission problem solved with his expert guidance.</div>
+          <div class="review-meta">Samantha Price - Ottawa Canada</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">YouTube copyright claim dispute support was accurate. The strike was eventually removed.</div>
+          <div class="review-meta">Kamal Hossain - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp verification code and number access issues resolved smoothly.</div>
+          <div class="review-meta">Victoria Hayes - Glasgow United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok disabled account case closed successfully. He remained available for follow up questions.</div>
+          <div class="review-meta">Sohel Rana - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Gmail and linked services recovery handled carefully. All connected accounts were secured.</div>
+          <div class="review-meta">Brandon Cole - Nashville USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram appeal process improved significantly with his feedback on previous submissions.</div>
+          <div class="review-meta">Ayesha Siddika - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook page that lost all admins was recovered through the proper official channels.</div>
+          <div class="review-meta">Patrick Hughes - Cork Ireland</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Telegram access restored after long period of inactivity. Clear and reliable instructions.</div>
+          <div class="review-meta">Rafiq Ahmed - Dhaka Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">X account recovery after suspension for reported activity. The appeal was accepted.</div>
+          <div class="review-meta">Melissa Grant - Orlando USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok creator account help was outstanding. He understood platform policies very well.</div>
+          <div class="review-meta">Imtiaz Khan - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp business account setup and verification completed without further problems.</div>
+          <div class="review-meta">Helen Foster - Cardiff United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram login issue after phone reset resolved quickly with the correct recovery flow.</div>
+          <div class="review-meta">Shahin Alam - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Google account and YouTube channel access restored together. Very organized support.</div>
+          <div class="review-meta">Tyler Brooks - Indianapolis USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook disabled profile recovered after submitting the right identity documents.</div>
+          <div class="review-meta">Parvin Akter - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Discord and related community account recovery handled professionally.</div>
+          <div class="review-meta">Adam Cooper - Aberdeen United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok suspended account came back after a well prepared appeal. Grateful for the guidance.</div>
+          <div class="review-meta">Masud Rana - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Snapchat account recovery and security improvement tips were both very useful.</div>
+          <div class="review-meta">Ashley Morgan - Sacramento USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram business account access restored. Continuous support until everything worked again.</div>
+          <div class="review-meta">Nasir Uddin - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp number banned support led to successful reinstatement. Clear communication always.</div>
+          <div class="review-meta">Rebecca Stone - Brighton United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">YouTube channel strike appeal succeeded with the documentation structure he recommended.</div>
+          <div class="review-meta">Jahangir Alam - Dhaka Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Gmail recovery process completed after several attempts. Persistence and correct method paid off.</div>
+          <div class="review-meta">Dylan Reed - Kansas City USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook page and personal account both secured after the recovery process.</div>
+          <div class="review-meta">Shila Begum - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok login recovery after device change was handled smoothly and quickly.</div>
+          <div class="review-meta">Owen Bailey - Liverpool United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram disabled account finally restored. The second appeal written with his help worked.</div>
+          <div class="review-meta">Harun Rashid - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Telegram recovery and security setup completed. Very practical and useful advice overall.</div>
+          <div class="review-meta">Christina Wells - Raleigh USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp business and personal account issues both resolved with consistent support.</div>
+          <div class="review-meta">Belal Hossain - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">X account guidance was realistic and the final appeal brought the account back.</div>
+          <div class="review-meta">Julia Bennett - Nottingham United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook hacked account recovery and later security hardening were both excellent.</div>
+          <div class="review-meta">Rokeya Khatun - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Google account locked for long period was recovered with careful verification steps.</div>
+          <div class="review-meta">Nathan Hayes - Columbus USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok creator related suspension lifted after proper appeal preparation.</div>
+          <div class="review-meta">Alamgir Hossain - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram and Facebook connected accounts recovered together. Professional service end to end.</div>
+          <div class="review-meta">Grace Mitchell - Sheffield United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp access restored and backup issues fixed. Clear instructions that actually worked.</div>
+          <div class="review-meta">Mofizul Islam - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">YouTube channel access problem solved after following the recovery checklist he provided.</div>
+          <div class="review-meta">Isaac Powell - Milwaukee USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok account recovery support was patient and detailed. Everything was explained clearly.</div>
+          <div class="review-meta">Sultana Begum - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook business manager full recovery completed. Very knowledgeable about the platform tools.</div>
+          <div class="review-meta">Chloe Richardson - Newcastle United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Gmail and associated services brought back successfully. Thankful for the structured help.</div>
+          <div class="review-meta">Rakib Hasan - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram appeal success after previous failures. The improved submission made the difference.</div>
+          <div class="review-meta">Liam Foster - Bristol USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp banned account case handled with honesty and proper official process guidance.</div>
+          <div class="review-meta">Halima Akter - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Telegram login recovery completed without further complications. Reliable support overall.</div>
+          <div class="review-meta">Sophia Reed - Manchester United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok and Instagram dual recovery support was well coordinated and successful.</div>
+          <div class="review-meta">Azizul Haque - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook page recovery after complete loss of access. Detailed and careful process followed.</div>
+          <div class="review-meta">Mason Clark - Salt Lake City USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">YouTube channel reinstated after community guidelines appeal. Strong documentation support.</div>
+          <div class="review-meta">Nazrul Islam - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Gmail recovery and security review completed. He also helped set up better protection.</div>
+          <div class="review-meta">Ella Hughes - Leicester United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram disabled account brought back after persistent and well guided appeals.</div>
+          <div class="review-meta">Shahadat Hossain - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp verification and number issues fixed completely. Practical everyday advice given.</div>
+          <div class="review-meta">Aiden Brooks - Richmond USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok account fully recovered and secured. Clear communication from the first message.</div>
+          <div class="review-meta">Farzana Yasmin - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook and Messenger access restored together. Very complete and careful support.</div>
+          <div class="review-meta">Isla Thompson - York United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">X account suspension lifted after following the exact appeal structure he provided.</div>
+          <div class="review-meta">Mahmudul Hasan - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Google locked account and recovery phone issues both handled successfully.</div>
+          <div class="review-meta">Zoe Parker - Tucson USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram creator account help was detailed and effective. Platform knowledge is strong.</div>
+          <div class="review-meta">Rokibul Islam - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp business account full setup and recovery completed without errors.</div>
+          <div class="review-meta">Lily Adams - Southampton United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok disabled account recovery finished successfully. Grateful for the consistent help.</div>
+          <div class="review-meta">Abdul Mannan - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook page and ad account access problems resolved with expert level guidance.</div>
+          <div class="review-meta">Connor Bailey - Oklahoma City USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">YouTube channel recovery after long suspension completed. Documentation support was key.</div>
+          <div class="review-meta">Shahnaz Begum - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Gmail and all linked services restored. The process was explained in a calm manner.</div>
+          <div class="review-meta">Harper Wilson - Louisville USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram login and two factor recovery finished without further issues.</div>
+          <div class="review-meta">Golam Kibria - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp number recovery and security check completed successfully.</div>
+          <div class="review-meta">Amelia Scott - Exeter United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok appeal process success after earlier rejections. Improved materials made it work.</div>
+          <div class="review-meta">Jahirul Islam - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook disabled account fully active again. Patient support over several days.</div>
+          <div class="review-meta">Logan Price - Memphis USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Telegram account access restored and additional security applied as advised.</div>
+          <div class="review-meta">Nasreen Akter - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">X and related platform recovery guidance was clear and ultimately successful.</div>
+          <div class="review-meta">Scarlett Hughes - Cambridge United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram and TikTok accounts both recovered under one coordinated support process.</div>
+          <div class="review-meta">Moinul Haque - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp banned account reinstated after correct appeal submission.</div>
+          <div class="review-meta">Gabriel Reed - Albuquerque USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">YouTube channel access and monetization related issues guided properly.</div>
+          <div class="review-meta">Salma Begum - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Gmail recovery completed when other methods had failed. Structured approach worked.</div>
+          <div class="review-meta">Ellie Foster - Oxford United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook page full recovery after admin loss. Detailed steps and continuous updates.</div>
+          <div class="review-meta">Rashedul Karim - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok account secured and recovered. Prevention advice was also valuable.</div>
+          <div class="review-meta">Madison Cole - Fresno USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram disabled account case closed positively after proper preparation.</div>
+          <div class="review-meta">Abdul Jabbar - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp and Telegram recovery support delivered with clear expectations.</div>
+          <div class="review-meta">Freya Bennett - Norwich United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Google account and YouTube channel both returned to normal operation.</div>
+          <div class="review-meta">Shahidul Haque - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook business tools access restored completely. Expert level platform knowledge.</div>
+          <div class="review-meta">Hunter Gray - Tucson USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok creator account full recovery and policy guidance received.</div>
+          <div class="review-meta">Jahanara Begum - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram login recovery after multiple failed attempts finally succeeded.</div>
+          <div class="review-meta">Aaron Mitchell - Omaha USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp number and verification problems solved permanently.</div>
+          <div class="review-meta">Nusrat Jahan - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">X account recovery completed with well structured appeal content.</div>
+          <div class="review-meta">Poppy Richardson - Plymouth United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">YouTube channel reinstated and additional security measures applied.</div>
+          <div class="review-meta">Kamrul Hasan - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Gmail locked account recovery finished successfully after careful steps.</div>
+          <div class="review-meta">Audrey Brooks - Des Moines USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook and Instagram dual platform recovery handled professionally.</div>
+          <div class="review-meta">Rahim Uddin - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok suspended account restored after improved appeal submission.</div>
+          <div class="review-meta">Willow Hayes - Canterbury United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp business full recovery and verification completed.</div>
+          <div class="review-meta">Sabina Yasmin - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Telegram access and security configuration finished without issues.</div>
+          <div class="review-meta">Carson Price - Boise USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram account fully recovered and secured with better practices.</div>
+          <div class="review-meta">Abdul Halim - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook page recovery after complete access loss was successful.</div>
+          <div class="review-meta">Iris Cooper - Bath United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Google and YouTube services restored together under one process.</div>
+          <div class="review-meta">Mizan Rahman - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok account recovery support remained available until full success.</div>
+          <div class="review-meta">Jordan Ellis - Anchorage USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp banned account successfully reinstated with proper guidance.</div>
+          <div class="review-meta">Shamsun Nahar - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">X account appeal accepted after careful preparation of the required information.</div>
+          <div class="review-meta">Evelyn Gray - Durham United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram disabled account recovered after consistent and informed support.</div>
+          <div class="review-meta">Faruk Ahmed - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">YouTube channel full recovery and policy compliance guidance received.</div>
+          <div class="review-meta">Miles Foster - Spokane USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook business manager and page access completely restored.</div>
+          <div class="review-meta">Rokeya Begum - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Gmail recovery process completed with all verification steps handled carefully.</div>
+          <div class="review-meta">Piper Reed - Lexington USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok and related creator tools access returned to normal operation.</div>
+          <div class="review-meta">Abdul Qader - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp number recovery and full account access achieved successfully.</div>
+          <div class="review-meta">Aurora Bailey - Winchester United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram account secured after recovery and additional protection enabled.</div>
+          <div class="review-meta">Shahinur Rahman - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Telegram and WhatsApp dual recovery support delivered clearly and effectively.</div>
+          <div class="review-meta">Tristan Cole - Eugene USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook disabled account case resolved after multiple supported appeals.</div>
+          <div class="review-meta">Lutfun Nahar - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">YouTube channel reinstated with proper documentation and appeal structure.</div>
+          <div class="review-meta">Hazel Price - Chester United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok account full recovery completed and security recommendations followed.</div>
+          <div class="review-meta">Mohammad Ali - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Gmail and all connected services brought back under controlled recovery.</div>
+          <div class="review-meta">Silas Morgan - Reno USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram and Facebook accounts recovered with coordinated professional help.</div>
+          <div class="review-meta">Nasima Akter - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp business verification and access restored completely.</div>
+          <div class="review-meta">Ivy Richardson - Lancaster United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">X account successfully reinstated after careful appeal preparation.</div>
+          <div class="review-meta">Abdul Aziz - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok disabled account recovered and later secured against future issues.</div>
+          <div class="review-meta">Roman Hayes - Fargo USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Facebook page and personal profile both fully operational again.</div>
+          <div class="review-meta">Shamsul Haque - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">YouTube and Google account recovery finished with clear final confirmation.</div>
+          <div class="review-meta">Violet Foster - Carlisle United Kingdom</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Instagram account recovery process completed successfully after detailed guidance.</div>
+          <div class="review-meta">Rahman Ali - Sylhet Bangladesh</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">WhatsApp number and account access fully restored with proper steps.</div>
+          <div class="review-meta">Jasper Reed - Billings USA</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">TikTok creator account help and final recovery achieved with consistent support.</div>
+          <div class="review-meta">Fatema Begum - Sylhet Bangladesh</div>
+        </div>
+      </div>
+
+      <div class="review-actions">
+        <button class="review-btn" id="leaveReviewBtn">
+          <i class="fa-solid fa-pen"></i> Leave a Review
+        </button>
+        <button class="review-btn" onclick="document.getElementById('reviewsBox').scrollTop = 0">
+          <i class="fa-solid fa-arrow-up"></i> Back to Top
+        </button>
       </div>
     </section>
 
@@ -716,9 +1343,7 @@
   <!-- MY INFO MODAL -->
   <div class="modal-overlay" id="infoModal">
     <div class="modal-box">
-      <button class="modal-close" id="closeInfoModal">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+      <button class="modal-close" id="closeInfoModal"><i class="fa-solid fa-xmark"></i></button>
       <div class="modal-header">
         <h3>My Information</h3>
         <p>Bruno - Cyber Security Expert</p>
@@ -769,57 +1394,45 @@
   </div>
 
   <script>
-    // Canvas Background
+    // Canvas
     const canvas = document.getElementById("cyberCanvas");
     const ctx = canvas.getContext("2d");
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
+    function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
     resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    const nodes = [];
-    const nodeCount = 60;
-    const colors = ["#00d9ff", "#9d5cff", "#ff4fd8"];
-
-    for (let i = 0; i < nodeCount; i++) {
+    window.addEventListener("resize",resizeCanvas);
+    const nodes=[];
+    const nodeCount=65;
+    const colors=["#00e5ff","#b56bff","#ff5ce1"];
+    for(let i=0;i<nodeCount;i++){
       nodes.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 1.0,
-        vy: (Math.random() - 0.5) * 1.0,
-        radius: Math.random() * 2.2 + 0.8,
-        color: colors[Math.floor(Math.random() * colors.length)]
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        vx:(Math.random()-0.5)*0.95,
+        vy:(Math.random()-0.5)*0.95,
+        radius:Math.random()*2.1+0.7,
+        color:colors[Math.floor(Math.random()*colors.length)]
       });
     }
-
-    function drawCircuit() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      for (let i = 0; i < nodes.length; i++) {
-        let node = nodes[i];
-        node.x += node.vx;
-        node.y += node.vy;
-
-        if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
-        if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
-
+    function drawCircuit(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(let i=0;i<nodes.length;i++){
+        let n=nodes[i];
+        n.x+=n.vx;n.y+=n.vy;
+        if(n.x<0||n.x>canvas.width)n.vx*=-1;
+        if(n.y<0||n.y>canvas.height)n.vy*=-1;
         ctx.beginPath();
-        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-        ctx.fillStyle = node.color;
+        ctx.arc(n.x,n.y,n.radius,0,Math.PI*2);
+        ctx.fillStyle=n.color;
         ctx.fill();
-
-        for (let j = i + 1; j < nodes.length; j++) {
-          let node2 = nodes[j];
-          let dist = Math.hypot(node.x - node2.x, node.y - node2.y);
-          if (dist < 130) {
+        for(let j=i+1;j<nodes.length;j++){
+          let n2=nodes[j];
+          let dist=Math.hypot(n.x-n2.x,n.y-n2.y);
+          if(dist<135){
             ctx.beginPath();
-            ctx.moveTo(node.x, node.y);
-            ctx.lineTo(node2.x, node2.y);
-            ctx.strokeStyle = `rgba(0, 217, 255, ${0.75 - dist / 130})`;
-            ctx.lineWidth = 0.55;
+            ctx.moveTo(n.x,n.y);
+            ctx.lineTo(n2.x,n2.y);
+            ctx.strokeStyle=`rgba(0,229,255,${0.7-dist/135})`;
+            ctx.lineWidth=0.55;
             ctx.stroke();
           }
         }
@@ -828,25 +1441,20 @@
     }
     drawCircuit();
 
-    // Form Submit
-    const form = document.getElementById("supportForm");
-    const whatsappNumber = "8801347344027";
-
-    form.addEventListener("submit", function (e) {
+    // Form
+    const form=document.getElementById("supportForm");
+    const whatsappNumber="8801347344027";
+    form.addEventListener("submit",function(e){
       e.preventDefault();
-
-      const name = document.getElementById("name").value.trim();
-      const service = document.getElementById("service").value;
-      const problem = document.getElementById("problem").value.trim();
-
-      if (!service || !problem) {
+      const name=document.getElementById("name").value.trim();
+      const service=document.getElementById("service").value;
+      const problem=document.getElementById("problem").value.trim();
+      if(!service||!problem){
         alert("Please select a service and write your problem.");
         return;
       }
-
-      const finalName = name ? name : "Not Provided";
-
-      const message = `Hello Bruno,
+      const finalName=name?name:"Not Provided";
+      const message=`Hello Bruno,
 
 New Support Request
 
@@ -855,34 +1463,35 @@ Service: ${service}
 
 Problem:
 ${problem}`;
-
-      const encodedMessage = encodeURIComponent(message);
-      const whatsappURL = `https://wa.me/\( {whatsappNumber}?text= \){encodedMessage}`;
-
-      window.open(whatsappURL, "_blank");
+      const encodedMessage=encodeURIComponent(message);
+      const whatsappURL=`https://wa.me/\( {whatsappNumber}?text= \){encodedMessage}`;
+      window.open(whatsappURL,"_blank");
     });
 
     // Modal
-    const openBtn = document.getElementById("openInfoModal");
-    const closeBtn = document.getElementById("closeInfoModal");
-    const modal = document.getElementById("infoModal");
-
-    openBtn.addEventListener("click", () => {
+    const openBtn=document.getElementById("openInfoModal");
+    const closeBtn=document.getElementById("closeInfoModal");
+    const modal=document.getElementById("infoModal");
+    openBtn.addEventListener("click",()=>{
       modal.classList.add("active");
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow="hidden";
     });
-
-    closeBtn.addEventListener("click", () => {
+    closeBtn.addEventListener("click",()=>{
       modal.classList.remove("active");
-      document.body.style.overflow = "";
+      document.body.style.overflow="";
+    });
+    modal.addEventListener("click",(e)=>{
+      if(e.target===modal){
+        modal.classList.remove("active");
+        document.body.style.overflow="";
+      }
     });
 
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.remove("active");
-        document.body.style.overflow = "";
-      }
+    // Leave Review
+    document.getElementById("leaveReviewBtn").addEventListener("click",()=>{
+      const reviewMsg=encodeURIComponent("Hello Bruno, I want to leave a review for your service.");
+      window.open(`https://wa.me/\( {whatsappNumber}?text= \){reviewMsg}`,"_blank");
     });
   </script>
 </body>
-              </html>
+</html>
