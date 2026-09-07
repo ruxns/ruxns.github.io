@@ -82,7 +82,13 @@
       position: absolute;
       inset: -8px;
       border-radius: 50%;
-      border: 1.5px solid rgba(0, 217, 255, 0.65);
+      padding: 2px;
+      background: linear-gradient(90deg, #00d9ff, #9d5cff, #ff4fd8);
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
       animation: pulseRing 2s linear infinite;
       pointer-events: none;
     }
@@ -90,7 +96,7 @@
     @keyframes pulseRing {
       0% {
         transform: scale(1);
-        opacity: 0.75;
+        opacity: 0.85;
       }
       100% {
         transform: scale(1.28);
@@ -844,4 +850,4 @@ ${problem}`;
     });
   </script>  
 </body>  
-  </html>
+</html>
