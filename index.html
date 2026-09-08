@@ -576,6 +576,17 @@
           <i class="fa-brands fa-instagram"></i>  
           <span>Instagram</span>  
         </a>    
+        <a class="social-btn" href="https://t.me/fbcxi" target="_blank">  
+          <i class="fa-brands fa-telegram"></i>  
+          <span>Telegram</span>  
+        </a>  
+      </div>
+
+      <div class="social-grid" style="margin-top:15px;">    
+        <a class="social-btn" href="https://wa.me/8801347344027" target="_blank">  
+          <i class="fa-brands fa-whatsapp"></i>  
+          <span>WhatsApp</span>  
+        </a>  
         <div class="social-btn" id="openInfoModal">  
           <i class="fa-solid fa-user"></i>  
           <span>My Info</span>  
@@ -598,7 +609,7 @@
         <div class="input-wrap full">  
           <label for="service">Select Problem / Service</label>  
           <select id="service" name="service" required>  
-            <option value="">•- Select a Service •-</option>  
+            <option value="">•- Select a Service -•</option>  
             <option>TikTok Account Recovery</option>  
             <option>TikTok Suspended Account Appeal Help</option>  
             <option>TikTok Disabled Account Recovery</option>  
@@ -659,7 +670,7 @@
 
         <div class="input-wrap full">  
           <button type="submit" class="submit-btn">  
-            <i class="fa-brands fa-whatsapp"></i> Submit On WhatsApp  
+            <i class="fa-brands fa-telegram"></i> Submit On Telegram  
           </button>  
         </div>  
       </form>  
@@ -792,9 +803,8 @@
 
     drawCircuit();
       
-    // Form Submit
+    // Form Submit → Telegram
     const form = document.getElementById("supportForm");  
-    const whatsappNumber = "8801347344027";  
       
     form.addEventListener("submit", function(e){  
       e.preventDefault();  
@@ -822,9 +832,9 @@ Problem:
 ${problem}`;  
       
       const encodedMessage = encodeURIComponent(message);  
-      const whatsappURL = `https://wa.me/\( {whatsappNumber}?text= \){encodedMessage}`;  
+      const telegramURL = `https://t.me/fbcxi?text=${encodedMessage}`;  
       
-      window.open(whatsappURL, "_blank");  
+      window.open(telegramURL, "_blank");  
     });  
 
     // My Info Modal
